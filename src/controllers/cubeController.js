@@ -1,13 +1,18 @@
 const express = require("express");
 const router = express.Router();
+const cubeManager = require("../managers/cubeManager");
 
-router.get('/create', (req,res) => {
-    res.render('create')
-})
-router.post('/create', (req, res) =>{
-    console.log(req.body)
+router.get("/create", (req, res) => {
+  console.log(cubeManager.getAll());
+  res.render("create");
+});
 
-    res.send('Form submited')
-})
+router.post("/create", (req, res) => {
+  const { name, description, imageUrl, difficultyLevel } = req.body;
 
-module.exports = router
+  cubeManager.create({ name, description, imageUrl, difficultyLeve: Number(difficultyLevel) });
+
+  res.redirect("/");
+});
+
+module.exports = router;
