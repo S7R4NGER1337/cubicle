@@ -16,7 +16,23 @@ const db = [
   },
 ];
 
-exports.getAll = () => db.slice();
+exports.getAll = (search, from, to) => {
+  let result = db.slice()
+
+  if(search) {
+    result = result.filter(cube => cube.name.toLowerCase().includes(search.toLowerCase()))
+  }
+
+  if(from) {
+    result = result.filter(cube => cube.difficultyLevel >= Number(from))
+  }
+
+  if(to){
+    result = result.filter(cube => cube.difficultyLevel <= Number(to))
+  }
+
+  return result
+};
 
 exports.getOne = (cubeId) => db.find(x => x.id == cubeId)
 
