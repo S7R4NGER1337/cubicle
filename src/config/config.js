@@ -1,0 +1,1 @@
+exports.SECRET = '50a0868b088519daed1af17373a9a8bd'
